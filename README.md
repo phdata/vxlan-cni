@@ -13,6 +13,8 @@ These distributed layer 2 networks are accomplished using a combination of the l
 Caveats:
  * Every node in the cluster will require an address on the macvlan to route for containers that it hosts. In large clusters running IPv4, this could consume a lot of address space.
  * Currently requires all cluster nodes to participate in the same layer 2 network as the underlay. In theory this could be built to work on an NBMA, but some work would need to be done to accomplish that.
+ * The host subnet routes create some interesting assymetric routing patterns that must be accounted for. Sometimes you can disable rp_filter. The plugin can optionally install a "bypass route" which sets up a custom rule to ensure that directly connected networks are routed out of the connected interface, instead of the more specific route being chosen.
 
 Features:
  * Hosts will dynamically connect to a given vxlan, only when starting a container on that network (Dynamic disconnect when all containers on a vxlan are gone is still a TODO item).
+ * You can specify a "default" network, where containers will be placed when the network is not specified.
