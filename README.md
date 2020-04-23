@@ -14,6 +14,7 @@ Caveats:
  * Every node in the cluster will require an address on the macvlan to route for containers that it hosts. In large clusters running IPv4, this could consume a lot of address space.
  * Currently requires all cluster nodes to participate in the same layer 2 network as the underlay. In theory this could be built to work on an NBMA, but some work would need to be done to accomplish that.
  * The host subnet routes create some interesting assymetric routing patterns that must be accounted for. Sometimes you can disable rp_filter. The plugin can optionally install a "bypass route" which sets up a custom rule to ensure that directly connected networks are routed out of the connected interface, instead of the more specific route being chosen.
+ * If running in k8s, it is highly recommended that the DNS services be isolated on their own network. When pods communicate with the DNS service address, dns responses may not be un-natted by the kube-proxy iptables rules because there is a direct connection to the requesting container. This causes failures in DNS resolution.
 
 Features:
  * Hosts will dynamically connect to a given vxlan, only when starting a container on that network (Dynamic disconnect when all containers on a vxlan are gone is still a TODO item).
