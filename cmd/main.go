@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/TrilliumIT/iputil"
+	cni "github.com/phdata/go-libcni"
+	"github.com/phdata/vxlan-cni"
 	log "github.com/sirupsen/logrus"
 	"github.com/vishvananda/netlink"
-	"gitlab.travishegner.com/travishegner/cni/cni"
-	"gitlab.travishegner.com/travishegner/cni/vxlan"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -91,7 +91,7 @@ func main() {
 		}
 	}
 
-	network, ok := conf.Args.Annotations[cni.NetworkAnnotation]
+	network, ok := conf.Args.Annotations[vxlan.NetworkAnnotation]
 	if !ok {
 		//if network is not specified in annotations
 		if conf.K8sNetworkFromNamespace {
@@ -133,7 +133,7 @@ func main() {
 
 	switch vars.Command {
 	case "ADD":
-		address, ok := conf.Args.Annotations[cni.AddressAnnotation]
+		address, ok := conf.Args.Annotations[vxlan.AddressAnnotation]
 		if !ok {
 			hostAddr, _ := netlink.ParseIPNet(vxlp.Cidr)
 			address = iputil.NetworkID(hostAddr).String()
