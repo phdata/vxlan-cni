@@ -7,3 +7,12 @@ This CNI plugin is for container runtime operators who wish to use subnets as an
 The network to which to connect (and optionally with a specific address) is passed in as part of the configuration. Optionally, the plugin can look in Kubernetes for pod annotations for the necessary information, since kubernetes does not yet support passing per pod annotations into a CNI plugin.
 
 This plugin will utilize an external CNI IPAM plugin, but it requires that the IPAM plugin is aware of all addresses cluster-wide. If you utilize the corresponding [routetable-ipam]() plugin, and a routing protocol, you can get efficient routing directly to a node running the destination container, without proxying through some other random node.
+
+These distributed layer 2 networks are accomplished using a combination of the linux kernel's built in [vxlan](https://www.kernel.org/doc/Documentation/networking/vxlan.txt) and [macvlan](https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking/#macvlan) drivers. When a container is started, the plugin will create a macvlan interface bridged with the hosts macvlan interface, both as slaves to the vxlan interface, and move the new macvlan interface into the container namespace. The container's default route is set to the nodes macvlan address, and traffic originating to/from the container is routed through the node.
+
+Caveats:
+ * Every node in the cluster will require an address on the macvlan to route for containers that it hosts. In large clusters running IPv4, this could consume a lot of address space.
+ * Currently requires all cluster nodes to participate in the same layer 2 network as the underlay. In theory this could be built to work on an NBMA, but some work would need to be done to accomplish that.
+
+Features:
+ * Hosts will dynamically connect to a given vxlan, only when starting a container on that network (Dynamic disconnect when all containers on a vxlan are gone is still a TODO item).
