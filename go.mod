@@ -7,7 +7,7 @@ require (
 	github.com/alexflint/go-filemutex v1.1.0
 	github.com/imdario/mergo v0.3.9 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
-	github.com/phdata/go-libcni v0.0.0-20200424183723-7b982caee5e2
+	github.com/phdata/go-libcni v0.0.0-20200424184630-ef98665238ca
 	github.com/sirupsen/logrus v1.5.0
 	github.com/vishvananda/netlink v1.1.0
 	github.com/vishvananda/netns v0.0.0-20191106174202-0a2b9b5464df
