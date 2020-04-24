@@ -19,3 +19,7 @@ Caveats:
 Features:
  * Hosts will dynamically connect to a given vxlan, only when starting a container on that network (Dynamic disconnect when all containers on a vxlan are gone is still a TODO item).
  * You can specify a "default" network, where containers will be placed when the network is not specified.
+
+
+
+The networking concepts and some of this code were inspired by and are originally from [here](https://github.com/TrilliumIT/vxrouter)
