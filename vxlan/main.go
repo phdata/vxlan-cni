@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
 	"time"
@@ -133,10 +134,18 @@ func main() {
 
 	switch vars.Command {
 	case "ADD":
-		address, ok := conf.Args.Annotations[vxlan.AddressAnnotation]
-		if !ok {
-			hostAddr, _ := netlink.ParseIPNet(vxlp.Cidr)
-			address = iputil.NetworkID(hostAddr).String()
+		hostAddr, _ := netlink.ParseIPNet(vxlp.Cidr)
+		address := iputil.NetworkID(hostAddr).String()
+
+		reqAddress, ok := conf.Args.Annotations[vxlan.AddressAnnotation]
+		if ok {
+			ip := net.ParseIP(reqAddress)
+			if ip != nil {
+				if hostAddr.Contains(ip) {
+					hostAddr.IP = ip
+					address = hostAddr.String()
+				}
+			}
 		}
 
 		//get/create host interface
