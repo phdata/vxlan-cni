@@ -99,6 +99,8 @@ github.com/phdata/go-libcni v0.0.0-20200423172506-0d1f5c2e60d6 h1:UnDY4M4Q4oTRsb
 github.com/phdata/go-libcni v0.0.0-20200423172506-0d1f5c2e60d6/go.mod h1:9u49LPfNjN39DccEu6cdejWQi+tz1aNvTuSd5AAk93k=
 github.com/phdata/go-libcni v0.0.0-20200423203329-a6f4c788a429 h1:meYNCYLf44Ec8YBbyn/YQErX2SED2ZhGQv4rXWnFt8M=
 github.com/phdata/go-libcni v0.0.0-20200423203329-a6f4c788a429/go.mod h1:UGHPjf9g64RmaxCf0Lfw44yk+LwRKd0l5qqzvncG8g8=
+github.com/phdata/go-libcni v0.0.0-20200424183723-7b982caee5e2 h1:sxGXXMqGh2YXZe4WL0uYpOyCCcb+62v/oCxyzoq3glY=
+github.com/phdata/go-libcni v0.0.0-20200424183723-7b982caee5e2/go.mod h1:UGHPjf9g64RmaxCf0Lfw44yk+LwRKd0l5qqzvncG8g8=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.5.0 h1:1N5EYkVAPEywqZRJd7cwnRtCb6xJx7NH3T3WUTF980Q=
